@@ -9,12 +9,12 @@ public class Schedule : BaseEntity
 {
     [Column("store_id")]
     public string StoreId { get; set; }
-
+    
     [ForeignKey("StoreId")]
     public Store Store { get; set; }
 
     [Column("special_day")]
-    public DateTime? SpecialDay { get; set; }
+    public long? SpecialDay { get; set; } // Epoch time
 
     [Column("description")]
     public string Description { get; set; }
@@ -31,3 +31,4 @@ public class Schedule : BaseEntity
     [Column("is_recurring")]
     public bool IsRecurring { get; set; }
 }
+

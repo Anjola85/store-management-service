@@ -1,94 +1,62 @@
-using InventoryManagementService.Data;
 using InventoryManagementService.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace InventoryManagementService.Controllers;
-
+using InventoryManagementService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-[Route("api/[controller]")]
-[ApiController]
-public class ScheduleController : ControllerBase
+namespace InventoryManagementService.Controllers
 {
-    private readonly InventoryContext _context;
-
-    public ScheduleController(InventoryContext context)
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SchedulesController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly IScheduleService _service;
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Schedule>>> GetSchedules()
-    {
-        return await _context.Schedules.ToListAsync();
-    }
-
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Schedule>> GetSchedule(string id)
-    {
-        var schedule = await _context.Schedules.FindAsync(id);
-
-        if (schedule == null)
+        public SchedulesController(IScheduleService service)
         {
-            return NotFound();
+            _service = service;
         }
 
-        return schedule;
-    }
-
-    [HttpPost]
-    public async Task<ActionResult<Schedule>> PostSchedule(Schedule schedule)
-    {
-        _context.Schedules.Add(schedule);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetSchedule), new { id = schedule.Id }, schedule);
-    }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutSchedule(string id, Schedule schedule)
-    {
-        if (id != schedule.Id)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Schedule>>> GetSchedules()
         {
-            return BadRequest();
+            return Ok(await _service.GetAllSchedules());
         }
 
-        _context.Entry(schedule).State = EntityState.Modified;
-
-        try
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Schedule>> GetSchedule(string id)
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!_context.Schedules.Any(e => e.Id == id))
+            var schedule = await _service.GetScheduleById(id);
+            if (schedule == null)
             {
                 return NotFound();
             }
-            else
-            {
-                throw;
-            }
+
+            return Ok(schedule);
         }
 
-        return NoContent();
-    }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteSchedule(string id)
-    {
-        var schedule = await _context.Schedules.FindAsync(id);
-        if (schedule == null)
+        [HttpPost]
+        public async Task<ActionResult<Schedule>> PostSchedule(Schedule schedule)
         {
-            return NotFound();
+            var createdSchedule = await _service.CreateSchedule(schedule);
+            return CreatedAtAction(nameof(GetSchedule), new { id = createdSchedule.Id }, createdSchedule);
         }
 
-        _context.Schedules.Remove(schedule);
-        await _context.SaveChangesAsync();
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutSchedule(string id, Schedule schedule)
+        {
+            if (id != schedule.Id)
+            {
+                return BadRequest();
+            }
 
-        return NoContent();
+            await _service.UpdateSchedule(id, schedule);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSchedule(string id)
+        {
+            await _service.DeleteSchedule(id);
+            return NoContent();
+        }
     }
 }
