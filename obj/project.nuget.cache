@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "D0yKZIIGuBJj0PLdNi72MbhhDwwdMm25+7x43noMhBts9QfT79TAURSW7DonER3otBQeSqOrNlKH2bivhC9cHg==",
+  "dgSpecHash": "EFxbXtgO9hteQ6XsYkHl39Ya+WUYnue4crrbFX6JgPvdptUQejMHXcixB1d5oiofnhQbSStyWpHJgxfhJuesZQ==",
   "success": true,
-  "projectFilePath": "/Users/muhammedadeyemi/RiderProjects/InventoryManagementService/InventoryManagementService/InventoryManagementService.csproj",
+  "projectFilePath": "/Users/muhammedadeyemi/Desktop/personal/store-management-service/InventoryManagementService.csproj",
   "expectedPackageFiles": [
     "/Users/muhammedadeyemi/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/muhammedadeyemi/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",

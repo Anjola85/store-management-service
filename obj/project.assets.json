@@ -4751,11 +4751,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/muhammedadeyemi/RiderProjects/InventoryManagementService/InventoryManagementService/InventoryManagementService.csproj",
+      "projectUniqueName": "/Users/muhammedadeyemi/Desktop/personal/store-management-service/InventoryManagementService.csproj",
       "projectName": "InventoryManagementService",
-      "projectPath": "/Users/muhammedadeyemi/RiderProjects/InventoryManagementService/InventoryManagementService/InventoryManagementService.csproj",
+      "projectPath": "/Users/muhammedadeyemi/Desktop/personal/store-management-service/InventoryManagementService.csproj",
       "packagesPath": "/Users/muhammedadeyemi/.nuget/packages/",
-      "outputPath": "/Users/muhammedadeyemi/RiderProjects/InventoryManagementService/InventoryManagementService/obj/",
+      "outputPath": "/Users/muhammedadeyemi/Desktop/personal/store-management-service/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/muhammedadeyemi/.nuget/NuGet/NuGet.Config"
@@ -4776,6 +4776,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
